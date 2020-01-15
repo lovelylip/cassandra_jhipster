@@ -1,0 +1,30 @@
+{
+  "cassilkApp": {
+    "dmCqbh": {
+      "home": {
+        "title": "Dm Cqbhs",
+        "createLabel": "Create a new Dm Cqbh",
+        "createOrEditLabel": "Create or edit a Dm Cqbh",
+        "notFound": "No Dm Cqbhs found"
+      },
+      "created": "A new Dm Cqbh is created with identifier {{ param }}",
+      "updated": "A Dm Cqbh is updated with identifier {{ param }}",
+      "deleted": "A Dm Cqbh is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dm Cqbh {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Cqbh"
+      },
+      "ma": "Ma",
+      "ten": "Ten",
+      "maCha": "Ma Cha",
+      "tenCha": "Ten Cha",
+      "diaChi": "Dia Chi",
+      "path": "Path",
+      "maTinh": "Ma Tinh",
+      "maHuyen": "Ma Huyen",
+      "maXa": "Ma Xa"
+    }
+  }
+}

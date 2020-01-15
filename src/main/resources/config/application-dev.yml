@@ -39,7 +39,7 @@ spring:
       contactPoints: localhost
       protocolVersion: V4
       compression: LZ4
-      keyspaceName: cassilk
+      keyspaceName: cassandra
   mail:
     host: localhost
     port: 25

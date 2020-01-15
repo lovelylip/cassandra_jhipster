@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cassilkApp.dmCqbh.home.title">Dm Cqbhs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-dm-cqbh" [routerLink]="['/dm-cqbh/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cassilkApp.dmCqbh.home.createLabel">
+            Create a new Dm Cqbh
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="dmCqbhs?.length === 0">
+        <span jhiTranslate="cassilkApp.dmCqbh.home.notFound">No dmCqbhs found</span>
+    </div>
+    <div class="table-responsive" *ngIf="dmCqbhs?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.ma">Ma</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.ten">Ten</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.maCha">Ma Cha</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.tenCha">Ten Cha</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.diaChi">Dia Chi</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.path">Path</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.maTinh">Ma Tinh</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.maHuyen">Ma Huyen</span></th>
+            <th scope="col" ><span jhiTranslate="cassilkApp.dmCqbh.maXa">Ma Xa</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dmCqbh of dmCqbhs ;trackBy: trackId">
+                <td><a [routerLink]="['/dm-cqbh', dmCqbh.id, 'view' ]">{{dmCqbh.id}}</a></td>
+                <td>{{dmCqbh.ma}}</td>
+                <td>{{dmCqbh.ten}}</td>
+                <td>{{dmCqbh.maCha}}</td>
+                <td>{{dmCqbh.tenCha}}</td>
+                <td>{{dmCqbh.diaChi}}</td>
+                <td>{{dmCqbh.path}}</td>
+                <td>{{dmCqbh.maTinh}}</td>
+                <td>{{dmCqbh.maHuyen}}</td>
+                <td>{{dmCqbh.maXa}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/dm-cqbh', dmCqbh.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/dm-cqbh', dmCqbh.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/dm-cqbh', { outlets: { popup: dmCqbh.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

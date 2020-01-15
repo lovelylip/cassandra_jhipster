@@ -8,6 +8,8 @@ import { CSRFService } from '../auth/csrf.service';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'webstomp-client';
 
+import { IDmCqbh, DmCqbh } from 'app/shared/model/dm-cqbh.model';
+
 @Injectable({ providedIn: 'root' })
 export class JhiTrackerService {
   stompClient = null;
@@ -80,6 +82,24 @@ export class JhiTrackerService {
     this.connection.then(() => {
       this.subscriber = this.stompClient.subscribe('/topic/tracker', data => {
         this.listenerObserver.next(JSON.parse(data.body));
+      });
+    });
+  }
+
+  sendActivityDmCqbh(dmCqbh: IDmCqbh) {
+    if (this.stompClient !== null && this.stompClient.connected) {
+      this.stompClient.send(
+        '/topic/activityDmCqbh', // destination
+        dmCqbh, // body
+        {} // header
+      );
+    }
+  }
+
+  subscribeDmCqbh() {
+    this.connection.then(() => {
+      this.subscriber = this.stompClient.subscribe('/topic/trackerDmCqbh', data => {
+        this.listenerObserver.next(data.body);
       });
     });
   }

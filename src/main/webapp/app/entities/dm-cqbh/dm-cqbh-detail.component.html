@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dmCqbh">
+            <h2><span jhiTranslate="cassilkApp.dmCqbh.detail.title">Dm Cqbh</span> {{dmCqbh.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.ma">Ma</span></dt>
+                <dd>
+                    <span>{{dmCqbh.ma}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.ten">Ten</span></dt>
+                <dd>
+                    <span>{{dmCqbh.ten}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.maCha">Ma Cha</span></dt>
+                <dd>
+                    <span>{{dmCqbh.maCha}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.tenCha">Ten Cha</span></dt>
+                <dd>
+                    <span>{{dmCqbh.tenCha}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.diaChi">Dia Chi</span></dt>
+                <dd>
+                    <span>{{dmCqbh.diaChi}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.path">Path</span></dt>
+                <dd>
+                    <span>{{dmCqbh.path}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.maTinh">Ma Tinh</span></dt>
+                <dd>
+                    <span>{{dmCqbh.maTinh}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.maHuyen">Ma Huyen</span></dt>
+                <dd>
+                    <span>{{dmCqbh.maHuyen}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmCqbh.maXa">Ma Xa</span></dt>
+                <dd>
+                    <span>{{dmCqbh.maXa}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dm-cqbh', dmCqbh.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

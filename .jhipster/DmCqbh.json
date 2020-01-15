@@ -1,0 +1,57 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "ma",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ten",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "maCha",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tenCha",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "diaChi",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "path",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maTinh",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maHuyen",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maXa",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20191208094739",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "dm_cqbh",
+    "databaseType": "cassandra",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
