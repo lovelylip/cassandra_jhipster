@@ -92,7 +92,7 @@ public class DmCqbhResourceIT extends AbstractCassandraTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DmCqbhResource dmCqbhResource = new DmCqbhResource(dmCqbhService);
+        final DmCqbhResource dmCqbhResource = new DmCqbhResource(dmCqbhService, null);
         this.restDmCqbhMockMvc = MockMvcBuilders.standaloneSetup(dmCqbhResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -1,0 +1,26 @@
+{
+  "cassilkApp": {
+    "dmDonVi": {
+      "home": {
+        "title": "Dm Don Vis",
+        "createLabel": "Create a new Dm Don Vi",
+        "createOrEditLabel": "Create or edit a Dm Don Vi",
+        "notFound": "No Dm Don Vis found"
+      },
+      "created": "A new Dm Don Vi is created with identifier {{ param }}",
+      "updated": "A Dm Don Vi is updated with identifier {{ param }}",
+      "deleted": "A Dm Don Vi is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dm Don Vi {{ id }}?"
+      },
+      "detail": {
+        "title": "Dm Don Vi"
+      },
+      "ma": "Ma",
+      "ten": "Ten",
+      "maTinh": "Ma Tinh",
+      "maHuyen": "Ma Huyen",
+      "maXa": "Ma Xa"
+    }
+  }
+}

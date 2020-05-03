@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,8 +37,11 @@ public class DmCqbhResource {
 
     private final DmCqbhService dmCqbhService;
 
-    public DmCqbhResource(DmCqbhService dmCqbhService) {
+    private final SimpMessageSendingOperations messagingTemplate;
+
+    public DmCqbhResource(DmCqbhService dmCqbhService, SimpMessageSendingOperations messagingTemplate) {
         this.dmCqbhService = dmCqbhService;
+        this.messagingTemplate = messagingTemplate;
     }
 
     /**
@@ -55,6 +59,7 @@ public class DmCqbhResource {
         }
         dmCqbhDTO.setId(UUID.randomUUID());
         DmCqbhDTO result = dmCqbhService.save(dmCqbhDTO);
+        messagingTemplate.convertAndSend("/topic/trackerDmCqbh", result);
         return ResponseEntity.created(new URI("/api/dm-cqbhs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

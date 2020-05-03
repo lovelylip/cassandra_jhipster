@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dmDonVi">
+            <h2><span jhiTranslate="cassilkApp.dmDonVi.detail.title">Dm Don Vi</span> {{dmDonVi.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cassilkApp.dmDonVi.ma">Ma</span></dt>
+                <dd>
+                    <span>{{dmDonVi.ma}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmDonVi.ten">Ten</span></dt>
+                <dd>
+                    <span>{{dmDonVi.ten}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmDonVi.maTinh">Ma Tinh</span></dt>
+                <dd>
+                    <span>{{dmDonVi.maTinh}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmDonVi.maHuyen">Ma Huyen</span></dt>
+                <dd>
+                    <span>{{dmDonVi.maHuyen}}</span>
+                </dd>
+                <dt><span jhiTranslate="cassilkApp.dmDonVi.maXa">Ma Xa</span></dt>
+                <dd>
+                    <span>{{dmDonVi.maXa}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dm-don-vi', dmDonVi.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

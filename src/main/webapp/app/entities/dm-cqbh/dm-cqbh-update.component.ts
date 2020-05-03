@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { IDmCqbh, DmCqbh } from 'app/shared/model/dm-cqbh.model';
 import { DmCqbhService } from './dm-cqbh.service';
-
+import { Router, NavigationEnd } from '@angular/router';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { JhiTrackerService } from 'app/core/tracker/tracker.service';
+import { Location } from '@angular/common';
+import { CSRFService } from 'app/core/auth/csrf.service';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'webstomp-client';
 
 @Component({
   selector: 'jhi-dm-cqbh-update',
@@ -16,6 +18,14 @@ import { JhiTrackerService } from 'app/core/tracker/tracker.service';
 })
 export class DmCqbhUpdateComponent implements OnInit {
   isSaving: boolean;
+  stompClient = null;
+  subscriber = null;
+  connection: Promise<any>;
+  connectedPromise: any;
+  listener: Observable<any>;
+  listenerObserver: Observer<any>;
+  alreadyConnectedOnce = false;
+  private subscription: Subscription;
 
   editForm = this.fb.group({
     id: [],
@@ -34,7 +44,10 @@ export class DmCqbhUpdateComponent implements OnInit {
     protected dmCqbhService: DmCqbhService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private trackerService: JhiTrackerService
+    private trackerService: JhiTrackerService,
+    private location: Location,
+    private csrfService: CSRFService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -66,14 +79,39 @@ export class DmCqbhUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const dmCqbh = this.createFromForm();
-    window.console.log(JSON.stringify(dmCqbh));
-    window.console.log(JSON.parse(JSON.stringify(dmCqbh)));
-    this.trackerService.sendActivityDmCqbh(dmCqbh);
+
+    if (this.connectedPromise === null) {
+      this.connection = this.createConnection();
+    }
+    let url = '/websocket/tracker';
+    url = this.location.prepareExternalUrl(url);
+    const socket = new SockJS(url);
+    this.stompClient = Stomp.over(socket);
+    const headers = {};
+    headers['X-XSRF-TOKEN'] = this.csrfService.getCSRF('XSRF-TOKEN');
+    this.stompClient.connect(headers, () => {
+      // this.connectedPromise('success');
+      // this.connectedPromise = null;
+      this.trackerService.sendActivityDmCqbh(dmCqbh);
+      if (!this.alreadyConnectedOnce) {
+        this.subscription = this.router.events.subscribe(event => {
+          if (event instanceof NavigationEnd) {
+            this.trackerService.sendActivityDmCqbh(dmCqbh);
+          }
+        });
+        this.alreadyConnectedOnce = true;
+      }
+    });
+
     if (dmCqbh.id !== undefined) {
       this.subscribeToSaveResponse(this.dmCqbhService.update(dmCqbh));
     } else {
       this.subscribeToSaveResponse(this.dmCqbhService.create(dmCqbh));
     }
+  }
+
+  private createConnection(): Promise<any> {
+    return new Promise((resolve, reject) => (this.connectedPromise = resolve));
   }
 
   private createFromForm(): IDmCqbh {

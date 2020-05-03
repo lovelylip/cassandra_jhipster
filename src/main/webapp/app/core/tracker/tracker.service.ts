@@ -99,7 +99,8 @@ export class JhiTrackerService {
   subscribeDmCqbh() {
     this.connection.then(() => {
       this.subscriber = this.stompClient.subscribe('/topic/trackerDmCqbh', data => {
-        this.listenerObserver.next(data.body);
+        // this.listenerObserver.next(data.body);
+        return data.body;
       });
     });
   }
